@@ -16,25 +16,26 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SampleSpringBootAwsS3Application implements CommandLineRunner {
 
-    @Autowired
-    private AmazonS3Service amazonS3Service;
+  @Autowired
+  private AmazonS3Service amazonS3Service;
 
-    public static void main(String[] args) {
-        SpringApplication.run(SampleSpringBootAwsS3Application.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(SampleSpringBootAwsS3Application.class, args);
+  }
 
-    @Override
-    public void run(String... args) throws Exception {
-        ObjectListing objectListing = amazonS3Service.getObjectList();
-        List<String> objects = objectListing.getObjectSummaries().stream().map(S3ObjectSummary::getKey).collect(Collectors.toList());
-        log.info("objects = {}", objects);
+  @Override
+  public void run(String... args) throws Exception {
+    ObjectListing objectListing = amazonS3Service.getObjectList();
+    List<String> objects = objectListing.getObjectSummaries().stream().map(S3ObjectSummary::getKey)
+        .collect(Collectors.toList());
+    log.info("objects = {}", objects);
 
-        String url = amazonS3Service.uploadFile(
-                "5.jpg",
-                new File("D:\\Downloads\\color-design-flora-1166644.jpg"));
+    String url = amazonS3Service.uploadFile(
+        "5.jpg",
+        new File("D:\\Downloads\\color-design-flora-1166644.jpg"), true, true);
 
 //        amazonS3Service.removeObject("videos/3.jpg");
 
-        log.info("objectUrl = {}", url);
-    }
+    log.info("objectUrl = {}", url);
+  }
 }
