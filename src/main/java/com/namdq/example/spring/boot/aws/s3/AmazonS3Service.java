@@ -23,22 +23,22 @@ public class AmazonS3Service {
 
   private AmazonS3 amazonS3;
 
-  @Value("${aws.s3.credentials.accessKey}")
+  @Value("${cloud.aws.credentials.accessKey}")
   private String accessKey;
 
-  @Value("${aws.s3.credentials.secretKey}")
+  @Value("${cloud.aws.credentials.secretKey}")
   private String secretKey;
 
-  @Value("${aws.s3.bucketName}")
-  private String bucketName;
-
-  @Value("${aws.s3.region}")
+  @Value("${cloud.aws.region.static}")
   private String region;
 
-  @Value("${aws.s3.defaultPath}")
+  @Value("${app.awsServices.bucketName}")
+  private String bucketName;
+
+  @Value("${app.awsServices.defaultPath}")
   private String defaultPath;
 
-  @Value("${aws.s3.endPointUrl}")
+  @Value("${app.awsServices.endPointUrl}")
   private String endPointUrl;
 
   @PostConstruct
